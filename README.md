@@ -1,61 +1,132 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Proyecto Laravel - API Backend
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="https://laravel.com" target="_blank">
+    <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="300" alt="Laravel Logo">
+  </a>
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Descripción
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Este proyecto es un backend desarrollado en Laravel que cuenta con autenticación avanzada usando JWT y OAuth con Google. Además, integra almacenamiento de archivos en AWS S3, y está preparado para correr en contenedores Docker con un servidor Nginx como proxy reverso.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+El proyecto está pensado para ser escalable, seguro y fácil de desplegar en ambientes de producción.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Features Principales
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Autenticación JWT** para APIs seguras y stateless.
+- **OAuth2 con Google** para login social.
+- **Almacenamiento de archivos en AWS S3**, permitiendo subir y servir archivos de forma eficiente y segura.
+- **Docker + Nginx**: Contenedores configurados para desarrollo y producción.
+- **API RESTful** con endpoints protegidos.
+- Middleware y políticas de autorización para roles y permisos.
+- Manejo de errores y validaciones con respuestas JSON claras.
+- Sistema de migraciones y seeders para manejo de base de datos.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Tecnologías y Herramientas
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+| Herramienta      | Descripción                           |
+|------------------|-------------------------------------|
+| Laravel          | Framework PHP para backend robusto  |
+| JWT (tymon/jwt)  | Autenticación basada en tokens       |
+| Socialite        | OAuth con Google y otros providers  |
+| AWS S3           | Almacenamiento en la nube de archivos|
+| Docker           | Contenerización para entornos        |
+| Nginx            | Servidor web y proxy reverso         |
+| MySQL / Postgres | Base de datos relacional             |
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+## Requisitos Previos
 
-## Contributing
+- Docker y Docker Compose instalados
+- AWS Credentials configuradas en `.env`
+- Google OAuth Credentials creadas en Google Cloud Console
+- Composer instalado (solo para desarrollo local sin Docker)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Configuración y Ejecución
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 1. Clonar el repositorio
 
-## Security Vulnerabilities
+```bash
+git clone https://github.com/lukkaku12/laravel-google-drive.git
+cd laravel-google-drive
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 2. Copiar archivo de configuración
+```bash
+cp .env.example .env
+```
 
-## License
+### 3. Configurar variables de entorno
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Edita .env para agregar:
+ - Configuración de base de datos (DB_HOST, DB_PORT, DB_DATABASE, etc.)
+ - Claves AWS (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION, AWS_BUCKET)
+ - Configuración JWT (JWT_SECRET)
+ - Configuración OAuth Google (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REDIRECT_URI)
+
+### 4. Construir y levantar contenedores Docker
+
+```bash
+docker-compose up -d --build
+```
+
+# Esto levantará:
+ - Contenedor Laravel PHP-FPM
+ - Contenedor Nginx sirviendo la app
+ - Contenedor de base de datos (MySQL/Postgres)
+ - Otros contenedores necesarios
+
+ ### Estructura de proyecto
+
+<pre>
+├── app
+├── bootstrap
+├── config
+├── database
+│   ├── migrations
+│   └── seeders
+├── nginx
+│   └── default.conf
+├── public
+├── resources
+├── routes
+└── tests
+.env
+.env.template
+.gitignore
+Dockerfile
+docker-compose.yml
+composer.json
+composer.lock
+
+</pre>
+## 🚀 API Endpoints
+
+A continuación, se listan los endpoints disponibles en la API, con su método HTTP, ruta y controlador asociado.
+
+| Método       | Ruta                          | Descripción / Controlador                             |
+|--------------|-------------------------------|------------------------------------------------------|
+| GET, HEAD    | `/api/auth/google/callback`   | Callback para OAuth con Google                        |
+| GET, HEAD    | `/api/auth/google/redirect`   | Redirección para OAuth con Google                     |
+| POST         | `/api/auth/login`             | Login de usuario (`UserController@login`)            |
+| POST         | `/api/auth/logout`            | Logout de usuario (`UserController@logout`)          |
+| GET, HEAD    | `/api/auth/me`                | Obtener info del usuario autenticado (`UserController@me`) |
+| POST         | `/api/auth/refresh`           | Refrescar token JWT (`UserController@refresh`)       |
+| POST         | `/api/auth/register`          | Registro de nuevo usuario (`UserController@register`)|
+| GET, HEAD    | `/api/files`                  | Listar archivos (`FileController@index`)             |
+| POST         | `/api/files`                  | Subir nuevo archivo (`FileController@store`)         |
+| GET, HEAD    | `/api/files/{path}`           | Obtener archivo por ruta (`FileController@show`)     |
+| DELETE       | `/api/files/{path}`           | Eliminar archivo por ruta (`FileController@destroy`) |
+| GET, HEAD    | `/sanctum/csrf-cookie`        | Obtener cookie CSRF (`CsrfCookieController@show`)    |
+| GET, HEAD    | `/storage/{path}`             | Servir archivo estático desde storage local           |
+| GET, HEAD    | `/up`                        | Endpoint de estado / health check                      |
